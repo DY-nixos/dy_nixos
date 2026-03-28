@@ -22,21 +22,16 @@
     enable = true;
     type = "fcitx5";
     fcitx5.addons = with pkgs; [
-    qt6Packages.fcitx5-chinese-addons # fcitx5-chinese-addons
-    #fcitx5-gtk
+    qt6Packages.fcitx5-chinese-addons 
     fcitx5-rime 
-    #qt6Packages.fcitx5-configtool  # fcitx5-configtool
-    #fcitx5-nord 
-
    ];
    fcitx5.waylandFrontend = true;
   };
 
   environment.variables = {
-    #GTK_IM_MODULE = "fcitx";
     QT_IM_MODULE = "fcitx";
     XMODIFIERS = "@im=fcitx";     
-    # 游戏和媒体应用设置
+   # 游戏和媒体应用设置
   GLFW_IM_MODULE = "ibus";
   SDL_IM_MODULE = "fcitx";
  };

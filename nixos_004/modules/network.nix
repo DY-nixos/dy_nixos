@@ -4,8 +4,6 @@
   
   # Enable NetworkManager for managing network connections.
   networking.networkmanager.enable = true;
-  
-
 
   # Clash proxy service
   environment.systemPackages = [
@@ -18,18 +16,19 @@
      serviceMode = true;
    tunMode = true; 
    };
- 
+
+ # Proxy
+      networking.proxy.default = "http://127.0.0.1:7897/";
+      networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
+  
 #services.mihomo = {
   #  enable = true;
   #  tunMode = true;
    # configFile = "/home/dy/.local/share/io.github.clash-verge-rev.clash-verge-rev/clash-verge.yaml";
    #webui = pkgs.metacubexd;
  #};
-  # Enable Wi-Fi support.
-  # networking.wireless.enable = true;
 
-
-  #Avahi for local network service discovery
+ #Avahi for local network service discovery
  services.avahi = {
     enable = true;
     nssmdns4 = true;
@@ -40,10 +39,4 @@
    };
     openFirewall = true;
  };
-
-
-  # Proxy
-      networking.proxy.default = "http://127.0.0.1:7897/";
-      networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
-  
 }

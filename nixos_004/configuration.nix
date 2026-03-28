@@ -50,7 +50,9 @@ boot.loader = {
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
   networking.hostName = "nixos"; # Define your hostname.
-  networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.  开启wifi硬件支持
+
+  # Enable Wi-Fi support.
+  networking.wireless.enable = true;  
 
   # Enable networking
   networking.networkmanager.enable = true;
