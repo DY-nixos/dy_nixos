@@ -1,4 +1,3 @@
-
 { config, pkgs, ... }:
 
 {
@@ -44,16 +43,21 @@ boot.loader = {
 
 
   # Bootloader.
-   #boot.loader.systemd-boot.enable = true;
-   #boot.loader.efi.canTouchEfiVariables = true;
+  #boot.loader.systemd-boot.enable = true;
+  #boot.loader.efi.canTouchEfiVariables = true;
 
   # Use latest kernel.
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
   networking.hostName = "nixos"; # Define your hostname.
+  networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.  开启wifi硬件支持
+
+  # Enable networking
+  networking.networkmanager.enable = true;
 
   # Set your time zone.
   time.timeZone = "Asia/Shanghai";
+
   # Enable the X11 windowing system.
   services.xserver.enable = true;
 
@@ -74,10 +78,8 @@ boot.loader = {
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
-  };
+ };
 
-  # Enable touchpad support (enabled default in most desktopManager).
-  # services.xserver.libinput.enable = true;
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.dy = {
     isNormalUser = true;
@@ -87,6 +89,9 @@ boot.loader = {
     #  thunderbird
     ];
   };
+
+  # Install firefox.
+  programs.firefox.enable = true;
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
@@ -98,8 +103,7 @@ boot.loader = {
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
-      networking.firewall.enable =true;
-
+      networking.firewall.enable = true;
+ 
   system.stateVersion = "25.11"; # Did you read the comment?
-
 }
