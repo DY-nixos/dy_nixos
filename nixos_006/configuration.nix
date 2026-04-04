@@ -32,7 +32,6 @@
  };
  boot.supportedFilesystems = [ "ntfs" "exfat" "vfat" "ext4" ];
  boot.loader.timeout = -1;
- 
  boot.loader.grub.efiSupport = true;
  boot.loader.grub.efiInstallAsRemovable = false; #主板在标准路径找启动文件 移动设备需要开启
  boot.loader.efi.canTouchEfiVariables = true; #主板根据 NVRAM 找启动文件（和上面只能二选一）
@@ -70,16 +69,6 @@
 
   # Enable CUPS to print documents.
   # services.printing.enable = true;
-
-  # Enable sound with pipewire.
-  #services.pulseaudio.enable = false;
-  #security.rtkit.enable = true;
-  #services.pipewire = {
-    #enable = true;
-    #alsa.enable = true;
-    #alsa.support32Bit = true;
-    #pulse.enable = true;
- #};
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.dy = {

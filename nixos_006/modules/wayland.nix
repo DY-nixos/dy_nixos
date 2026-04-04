@@ -1,5 +1,5 @@
-{ config, pkgs, lib, ... }: {
-
+{ config, pkgs, lib, ... }:
+{
  # niri和hyprland设置
 
  programs.hyprland.enable = true;
@@ -19,8 +19,6 @@
     comment = "Niri (UWSM managed)";
     prettyName = "Niri";
   };
-
-
 
  # ========== 系统服务优化 ==========
   
