@@ -31,7 +31,6 @@
     obs-studio
     libreoffice
     librecad
-    odafileconverter
     pureref     # 参考图管理工具（设计/绘画用）
     os-prober    # 操作系统检测工具（用于双系统引导） 
     papirus-icon-theme   # Papirus 图标主题
