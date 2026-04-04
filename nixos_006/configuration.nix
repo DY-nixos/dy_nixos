@@ -18,27 +18,27 @@
     # 增加下载缓冲区大小
     download-buffer-size = 524288000;
   };
- boot.loader = {
-   grub = {
-     enable = true;
-     extraEntries = ''
-       menuentry "Arch Linux" {
-         search --fs-uuid f8a9c7a0-896b-4e6b-859e-5c55e6f0fe1d --set=root
-         linux /@/boot/vmlinuz-linux root=UUID=f8a9c7a0-896b-4e6b-859e-5c55e6f0fe1d rw rootflags=subvol=@
-         initrd /@/boot/initramfs-linux.img
-       }
-     '';
+  boot.loader = {
+    grub = {
+      enable = true;
+      extraEntries = ''
+        menuentry "Arch Linux" {
+          search --fs-uuid f8a9c7a0-896b-4e6b-859e-5c55e6f0fe1d --set=root
+          linux /@/boot/vmlinuz-linux root=UUID=f8a9c7a0-896b-4e6b-859e-5c55e6f0fe1d rw rootflags=subvol=@
+          initrd /@/boot/initramfs-linux.img
+        }
+      '';
+   };
   };
- };
- boot.supportedFilesystems = [ "ntfs" "exfat" "vfat" "ext4" ];
- boot.loader.timeout = -1;
- boot.loader.grub.efiSupport = true;
- boot.loader.grub.efiInstallAsRemovable = false; #主板在标准路径找启动文件 移动设备需要开启
- boot.loader.efi.canTouchEfiVariables = true; #主板根据 NVRAM 找启动文件（和上面只能二选一）
- boot.loader.efi.efiSysMountPoint = "/boot";
- boot.loader.grub.device = "nodev";
- boot.loader.grub.useOSProber = false; #偶尔开启一次
- boot.initrd.kernelModules = [ "pinctrl_tigerlake" ];
+  boot.supportedFilesystems = [ "ntfs" "exfat" "vfat" "ext4" ];
+  boot.loader.timeout = -1;
+  boot.loader.grub.efiSupport = true;
+  boot.loader.grub.efiInstallAsRemovable = false; #主板在标准路径找启动文件 移动设备需要开启
+  boot.loader.efi.canTouchEfiVariables = true; #主板根据 NVRAM 找启动文件（和上面只能二选一）
+  boot.loader.efi.efiSysMountPoint = "/boot";
+  boot.loader.grub.device = "nodev";
+  boot.loader.grub.useOSProber = false; #偶尔开启一次
+  boot.initrd.kernelModules = [ "pinctrl_tigerlake" ];
 
   # Bootloader.
   #boot.loader.systemd-boot.enable = true;
@@ -69,7 +69,14 @@
 
   # Enable CUPS to print documents.
   # services.printing.enable = true;
-
+  services.pulseaudio.enable = false;
+    security.rtkit.enable = true;
+    services.pipewire = {
+      enable = true;
+      alsa.enable = true;
+      alsa.support32Bit = true;
+      pulse.enable = true;
+    };
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.dy = {
     isNormalUser = true;

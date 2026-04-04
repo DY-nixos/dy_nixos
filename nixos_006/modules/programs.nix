@@ -1,11 +1,11 @@
 { config, pkgs, lib, ... }: {
 
- #推荐方式
- programs.firefox.enable = true;       # 系统集成
- programs.vim.enable = true;
- programs.git.enable = true;           # 自动配置 + bash补全
- programs.fish.enable = true;          # 完整 shell 环境
- programs.yazi.enable = true;    
+  #推荐方式
+  programs.firefox.enable = true;       # 系统集成
+  programs.vim.enable = true;
+  programs.git.enable = true;           # 自动配置 + bash补全
+  programs.fish.enable = true;          # 完整 shell 环境
+  programs.yazi.enable = true;    
 
   # ========== 系统包安装 ==========
   environment.systemPackages = with pkgs; [
@@ -27,7 +27,9 @@
     libopenraw    # 相机 RAW 格式支持（.cr2, .nef 等）
     #wechat
     mpv   # 轻量级视频播放器
-    #qq     
+    #qq  
+    #awww   
+    #waypaper
     obs-studio
     libreoffice
     librecad

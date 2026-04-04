@@ -1,6 +1,5 @@
 # modules/nautilus.nix
 { config, pkgs, ... }:
-
 {
   # 安装 Nautilus
   environment.systemPackages = with pkgs; [

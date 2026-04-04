@@ -1,17 +1,17 @@
 { config, pkgs, lib, ... }:
 {
- # niri和hyprland设置
+  # niri和hyprland设置
 
- programs.hyprland.enable = true;
- programs.niri.enable = true;
- programs.xwayland.enable = true;
- programs.uwsm.enable = true;   # 启用 UWSM
+  programs.hyprland.enable = true;
+  programs.niri.enable = true;
+  programs.xwayland.enable = true;
+  programs.uwsm.enable = true;   # 启用 UWSM
 
- programs.hyprland = {
-    #enable = true;
-    xwayland.enable = true;
-    withUWSM = true;
-  };
+  programs.hyprland = {
+     #enable = true;
+     xwayland.enable = true;
+     withUWSM = true;
+   };
   
   # 配置 Niri 作为 UWSM 管理的合成器
   programs.uwsm.waylandCompositors.niri = {

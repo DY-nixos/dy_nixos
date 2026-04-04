@@ -35,7 +35,7 @@
    # 游戏和媒体应用设置
   GLFW_IM_MODULE = "fcitx";
   SDL_IM_MODULE = "fcitx";
- };
+  };
 
   # 中文字体优化
   fonts = {
@@ -52,5 +52,5 @@
     #  monospace = [ "Noto Sans Mono CJK SC" ];
      };
    };
- };
+  };
 }
