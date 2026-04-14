@@ -27,7 +27,7 @@
                     chainloader (''${root})/EFI/Microsoft/Boot/bootmgfw.efi
                 }
             '';
-   };
+    };
   };
   boot.supportedFilesystems = [ "ntfs" "exfat" "vfat" "ext4" ];
   boot.loader.timeout = -1;
