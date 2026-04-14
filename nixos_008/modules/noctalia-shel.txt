@@ -1,0 +1,11 @@
+{ pkgs, inputs, ... }:
+{
+  #开机启动和niri配置文件启动二选一
+  # import the nixos module
+  imports = [
+    inputs.noctalia.nixosModules.default
+  ];
+  # enable the systemd service
+ services.noctalia-shell.enable = true;
+
+}

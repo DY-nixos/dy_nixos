@@ -1,0 +1,30 @@
+# modules/nautilus.nix
+{ config, pkgs, ... }:
+{
+  # 安装 Nautilus
+  environment.systemPackages = with pkgs; [
+    nautilus
+  ];
+  
+  # 禁用索引器（最关键的性能优化）
+  services.gnome.localsearch.enable = false;
+  
+  # 性能优化设置
+  programs.dconf = {
+    enable = true;
+    profiles.user.databases = [{
+      settings = {
+        "org/gnome/nautilus/preferences" = {
+          default-folder-viewer = "list-view";
+          show-image-thumbnails = "local-only";
+          show-directory-item-counts = "never";
+        };
+      };
+    }];
+  };
+  
+  # 渲染优化
+  environment.sessionVariables = {
+    GSK_RENDERER = "gl";
+  };
+} 
