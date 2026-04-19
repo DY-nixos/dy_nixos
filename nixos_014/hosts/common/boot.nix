@@ -15,7 +15,7 @@
   };
 
   boot.supportedFilesystems = [ "ntfs" "exfat" "vfat" "ext4" ];
-  boot.loader.timeout = 5;
+  boot.loader.timeout = -1;
   boot.loader.grub.efiSupport = true;
   boot.loader.grub.efiInstallAsRemovable = false;
   boot.loader.efi.canTouchEfiVariables = true;
