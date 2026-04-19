@@ -1,0 +1,30 @@
+{config, lib, pkgs, ...}: 
+
+{
+  # ========== 系统包安装 ==========
+  environment.systemPackages = with pkgs; [
+    open-webui
+  ];
+      #部署逻辑大脑
+  services.ollama = {
+    enable = true;
+    package = pkgs.ollama-cuda; # 使用支持 CUDA 的包
+    host = "0.0.0.0";
+    port = 11434;
+  };
+  
+  # 在 configuration.nix 中启用 Docker
+  virtualisation.podman.enable = false;
+  virtualisation.docker.enable = true;
+  virtualisation.oci-containers = {
+    backend = "docker";  # <--- 必须加上这一行，强制 NixOS 放弃 Podman
+    containers."open-webui" = {
+      image = "ghcr.io/open-webui/open-webui:main";
+      ports = [ "3000:8080" ];
+      volumes = [ "/var/lib/open-webui:/app/backend/data" ];
+      extraOptions = [
+        "--add-host=host.docker.internal:host-gateway"
+      ];
+    };
+  };
+}
