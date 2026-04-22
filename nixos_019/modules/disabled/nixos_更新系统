@@ -1,0 +1,17 @@
+
+# 更新 inputs
+sudo nix flake update
+
+# 重建系统
+sudo nixos-rebuild switch --flake .#
+
+sudo nixos-rebuild switch --flake .# --option substituters "https://cache.nixos.org"
+
+
+grub-mkconfig -o /boot/grub/grub.cfg
+
+
+sudo nixos-rebuild --install-bootloader boot
+
+cd ~/nixos-config
+sudo nixos-rebuild switch --flake .#dynx

@@ -1,0 +1,168 @@
+在 NixOS 中清理构建版本（旧代系统、缓存和临时文件）有多种方法。以下是最常用的清理方法：
+1. 基本垃圾回收
+bash
+
+# 删除未引用的构建结果和下载
+nix-collect-garbage
+
+# 更激进的清理（推荐）
+nix-collect-garbage -d
+
+# 删除所有旧代系统（保留当前和最新一个）
+nix-collect-garbage --delete-old
+
+2. 按时间清理
+bash
+
+# 删除所有超过30天的旧代
+nix-collect-garbage --delete-older-than 30d
+
+# 删除所有旧代（仅保留当前）
+nix-collect-garbage --delete-older-than 0d
+
+3. 查看可清理的内容
+bash
+
+# 查看哪些路径可以被清理
+nix-store --gc --print-roots
+nix-store --gc --print-dead
+
+# 查看存储使用情况
+nix-store --query --disk-usage $(nix-store --gc --print-dead)
+
+# 查看系统代（generations）
+nix-env --list-generations -p /nix/var/nix/profiles/system
+
+4. 删除特定系统代
+bash
+
+# 列出所有系统代
+sudo nix-env -p /nix/var/nix/profiles/system --list-generations
+
+# 删除特定代（例如代数为10）
+sudo nix-env -p /nix/var/nix/profiles/system --delete-generations 10
+
+# 删除除最新3代外的所有旧代
+sudo nix-env -p /nix/var/nix/profiles/system --delete-generations +3
+
+5. 清理home-manager代
+bash
+
+# 查看home-manager代
+home-manager generations
+
+# 删除特定home-manager代
+home-manager remove-generations 1 2 3
+
+# 删除除最新3代外的所有旧代
+home-manager remove-generations +3
+
+6. 清理临时构建文件
+bash
+
+# 清理/tmp和/var/tmp
+sudo rm -rf /tmp/*
+sudo rm -rf /var/tmp/*
+
+# 清理Nix构建临时目录
+sudo rm -rf /nix/var/nix/tmp/*
+
+7. 清理Nix缓存
+bash
+
+# 查看缓存大小
+du -sh /nix/var/nix/cache
+
+# 清理nar缓存（Nix存档缓存）
+sudo rm -rf /nix/var/nix/cache/nar/*
+
+8. 自动清理配置
+
+在 /etc/nixos/configuration.nix 中配置自动清理：
+nix
+
+{ config, ... }:
+{
+  nix = {
+    # 启用自动垃圾回收
+    gc = {
+      automatic = true;
+      dates = "weekly";
+      options = "--delete-older-than 7d";
+    };
+    
+    # 自动优化存储
+    settings.auto-optimise-store = true;
+  };
+  
+  # 定期清理临时文件
+  systemd.tmpfiles.rules = [
+    "d /tmp 1777 root root 7d"
+    "d /var/tmp 1777 root root 14d"
+  ];
+}
+
+9. 最激进的清理（谨慎使用）
+bash
+
+# 删除所有未引用的路径（包括正在使用的依赖可能）
+sudo nix-store --gc
+
+# 优化存储（合并重复文件）
+sudo nix-store --optimise
+
+# 删除所有下载的nar文件
+sudo rm -rf /nix/var/nix/binary-cache/*
+
+10. 查看清理效果
+bash
+
+# 查看存储使用前/后
+df -h /nix/store
+nix path-info -S /nix/store/*
+
+# 查看清理后的系统代
+nix-env --list-generations -p /nix/var/nix/profiles/system | wc -l
+
+推荐的定期清理流程
+
+对于个人使用，建议：
+bash
+
+# 每周执行一次
+sudo nix-collect-garbage -d
+sudo nix-store --optimise
+
+# 每月执行一次
+sudo nix-env -p /nix/var/nix/profiles/system --delete-generations +5
+home-manager remove-generations +5
+
+注意事项
+
+    不要删除当前正在运行的代：这会导致系统问题
+
+    清理后无法回滚：删除的旧代无法恢复
+
+    第一次清理效果最明显：NixOS 默认会保留所有历史
+
+    安全清理：以下目录通常可以安全清理：
+
+        /nix/var/nix/profiles/per-user/*（用户profile）
+
+        /nix/var/nix/gcroots/auto/*（自动生成的gcroot）
+
+        /nix/var/log/nix/drvs/*（构建日志）
+
+查看存储占用明细
+bash
+
+# 按大小排序查看最大的包
+nix path-info -rSh /run/current-system | sort -h -k2
+
+# 查看所有store路径的总大小
+du -sh /nix/store
+
+# 使用ncdu交互式查看
+nix run nixpkgs#ncdu -- /nix/store
+
+选择适合你需求的清理策略。对于日常使用，设置自动垃圾回收（选项8）是最省心的方式。
