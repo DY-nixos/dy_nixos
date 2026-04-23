@@ -321,7 +321,7 @@ layout {
 spawn-at-startup "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"
 spawn-at-startup "awww-daemon"
 spawn-sh-at-startup "dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=niri & /usr/lib/xdg-desktop-portal-gnome &"
-spawn-at-startup "mako"
+//spawn-at-startup "mako"
 //spawn-at-startup "waybar"
 spawn-at-startup "noctalia-shell"
 //spawn-at-startup "clash-verge"
@@ -330,7 +330,7 @@ spawn-sh-at-startup "clipse --listen"
 spawn-at-startup "nm-applet"
 spawn-at-startup "~/.config/niri/scripts/swayidle.sh"
 // To run a shell command (with variables, pipes, etc.), use spawn-sh-at-startup:
- //spawn-sh-at-startup "qs -c ~/source/qs/MyAwesomeShell"
+//spawn-sh-at-startup "qs -c ~/source/qs/MyAwesomeShell"
 
 
 
