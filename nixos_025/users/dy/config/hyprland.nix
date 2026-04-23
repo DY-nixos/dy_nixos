@@ -58,11 +58,8 @@ xwayland{
 exec-once = noctalia-shell 
 exec-once = clash-verge
 # 自动启动 polkit-gnome（身份认证代理）
-#exec-once = ${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1
-#exec-once = /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
-#exec-once = /usr/lib/hyprpolkitagent/hyprpolkitagent
-#exec-once = systemctl --user start hyprpolkitagent
-exec-once = ${pkgs.hyprpolkitagent}/libexec/hyprpolkitagent
+exec-once = ${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1
+#exec-once = ${pkgs.hyprpolkitagent}/libexec/hyprpolkitagent
 #############################
 ### ENVIRONMENT VARIABLES ###
 #############################

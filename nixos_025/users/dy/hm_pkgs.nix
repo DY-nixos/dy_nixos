@@ -7,20 +7,22 @@
   programs.fish.enable = true;
 
   home.packages = with pkgs; [
-    #media
+    alacritty
+    fuzzel
+    
     mpv
     obs-studio
     blender
     foliate
     loupe
     mupdf
-    #tool
+    
     opencode
-    pureref
+    #pureref
     kdePackages.filelight
     kdePackages.partitionmanager
     xwayland-satellite
-    #fonts
+    
     nerd-fonts.jetbrains-mono
     bibata-cursors
     capitaine-cursors

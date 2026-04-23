@@ -17,9 +17,4 @@
     ./config/fcitx5.nix
     ./config/noctalia.nix
   ];
-
-  home.packages = with pkgs; [
-    alacritty
-    libnotify
-  ];
 }
