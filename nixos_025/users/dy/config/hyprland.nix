@@ -231,32 +231,27 @@ input {
     kb_options =
     kb_rules =
     
-    # --- 开启小键盘 ---
-    numlock_by_default = true
-    
+    numlock_by_default = true # --- 开启小键盘 ---
     float_switch_override_focus = 0
     #repeat_rate = 5  # 每秒重复次数，默认 25
     #repeat_delay = 300 # 按下后延迟多少毫秒开始重复，默认 300
-
-
     follow_mouse = 1
     accel_profile = flat
-
     sensitivity = 0 # -1.0 - 1.0, 0 means no modification.
-
     touchpad {
         natural_scroll = false
     }   
 }
+
 cursor {
-    no_warps = true
+    no_warps = true #禁止光标在特定操作下“瞬间移动”
 }
 
 # See https://wiki.hypr.land/Configuring/Gestures
 gesture = 3, horizontal, workspace
 
 # Example per-device config
-# See https://wiki.hypr.land/Configuring/Keywords/#per-device-input-configs for more
+# See https://wiki.hypr.land/Configuring/Keywords/ #per-device-input-configs for more
 device {
     name = epic-mouse-v1
     sensitivity = -0.5
@@ -310,10 +305,6 @@ bind = $mainMod, 7, workspace, 7
 bind = $mainMod, 8, workspace, 8
 bind = $mainMod, 9, workspace, 9
 bind = $mainMod, 0, workspace, 10
-
-# 使用 Super + 鼠标滚轮上下滚动
-bind = SUPER, mouse_down, layoutmsg, move +col
-bind = SUPER, mouse_up, layoutmsg, move -col
 
 # Move active window to a workspace with mainMod + SHIFT + [0-9]
 bind = $mainMod SHIFT, 1, movetoworkspace, 1
