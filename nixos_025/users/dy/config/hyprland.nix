@@ -267,6 +267,8 @@ $mainMod = SUPER # Sets "Windows" key as main modifier
 
 # Example binds, see https://wiki.hypr.land/Configuring/Binds/ for more
 binde = $mainMod, T, exec, $terminal -e fish
+bind = $mainMod SHIFT, T, exec, $terminal
+# 注意：通常是 bind 不是 binde
 bind = $mainMod, Q, killactive,
 bind = $mainMod, M, exec, command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch exit
 bind = $mainMod, E, exec, $fileManager

@@ -16,3 +16,19 @@ sudo chown -R dy:users ~/nixos-config
 # 4. 在用户目录下重建
 cd ~/nixos-config
 sudo nixos-rebuild switch --flake .#dynx
+
+#关于关闭clash 断网问题
+echo $http_proxy   #检查
+echo $https_proxy
+unset http_proxy https_proxy all_proxy  #注意这个是bash命令
+
+set -e http_proxy   #fish
+set -e https_proxy
+set -e all_proxy
+
+set -e http_proxy   # -e 就是 erase（擦除）的意思
+set -e https_proxy
+set -e all_proxy
+set -e HTTP_PROXY
+set -e HTTPS_PROXY
+set -e ALL_PROXY
