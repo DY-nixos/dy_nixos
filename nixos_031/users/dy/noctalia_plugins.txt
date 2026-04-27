@@ -1,0 +1,12 @@
+{ inputs, pkgs, ... }: {
+  imports = [ inputs.noctalia.homeModules.default ];
+
+  programs.noctalia-shell = {
+    enable = true;
+    plugins = [
+      "clipper"
+      "todo-list"      # ✅ 使用连字符代替空格
+      "screen-toolkit" # ✅ 使用连字符代替空格
+    ];
+  };
+}

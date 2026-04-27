@@ -12,6 +12,8 @@ grub-mkconfig -o /boot/grub/grub.cfg
 
 
 sudo nixos-rebuild --install-bootloader boot
+# 使用 flakes 方式
+sudo nixos-rebuild boot --install-bootloader --flake .#
 
 cd ~/nixos-config
 sudo nixos-rebuild switch --flake .#dynx
