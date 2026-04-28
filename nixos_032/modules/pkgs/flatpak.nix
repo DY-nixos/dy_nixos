@@ -6,6 +6,7 @@
   environment.systemPackages = with pkgs; [
     flatpak
     gnome-software
+    bazaar
   ];
 
   systemd.services.configure-flatpak-repo = {
@@ -15,8 +16,8 @@
     wants = [ "network-online.target" ];
     path = [ pkgs.flatpak ];
     script = ''
-      flatpak remote-add --if-not-exists flathub https://mirror.sjtu.edu.cn/flathub/flathub.flatpakrepo
-      flatpak remote-modify flathub --url=https://mirror.sjtu.edu.cn/flathub/
+      flatpak remote-add --if-not-exists flathub https://mirrors.ustc.edu.cn/flathub/flathub.flatpakrepo
+      flatpak remote-modify flathub --url=https://mirrors.ustc.edu.cn/flathub/
       flatpak update --appstream
     '';
   };
